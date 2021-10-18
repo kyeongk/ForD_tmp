@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kimyk.mapper.AllDramaMapper">
+
+<resultMap type="org.kimyk.domain.AllDramaVO" id="allMap">
+	<id property="id" column="id"/>
+	<result property="title" column="title"/>
+	<result property="posterUrl" column="posterUrl"/>
+	<result property="broadcastingName" column="broadcastingName"/>
+	<result property="startDate" column="startDate"/>
+	<result property="endDate" column="endDate"/>
+	<result property="state" column="state"/>
+	<result property="avgScore" column="avgScore"/>
+	<result property="totalEpisode" column="totalEpisode"/>
+	<result property="viewCount" column="viewCount"/>
+	<result property="dayOfWeek" column="dayOfWeek"/>
+	<collection property="watchingDramaVO" javaType="org.kimyk.domain.WatchingDramaVO">
+		<id property="id" column="id"/>
+		<result property="watchingRegDate" column="watchedRegDate"/>
+		<result property="all_drama_id" column="all_drama_id"/>
+		<result property="watchedEpiNumber" column="watchedEpiNumber"/>
+		<result property="replayCount" column="replayCount"/>
+		<result property="userid" column="userid"/>
+	</collection>
+</resultMap>
+
+<sql id='titleSearch'>
+	<!-- <trim prefix="(" suffix=") AND" prefixOverrides=""> -->
+		<foreach item='type' collection="typeArr">
+			<trim suffix="and">
+				<choose>
+					<when test="type=='T'.toString()">(title like CONCAT ('%',#{title},'%')) </when>
+					<when test="type=='S'.toString()">(state like CONCAT (#{state},'%')) </when>
+					<when test="type=='D'.toString()">(dayOfWeek like CONCAT ('%',#{dayOfWeek},'%')) </when>
+					<otherwise> </otherwise>
+				</choose>
+			</trim>
+		</foreach>
+	<!-- </trim> -->
+</sql>
+<sql id='arrange'>
+	<choose>
+		<when test="order=='title'">title </when>
+		<when test="order=='date'">startDate desc </when>
+		<when test="order=='totalEpisode'">totalEpisode </when>
+		<when test="order=='avgScore'">avgScore desc</when>
+		<when test="order=='viewCount'">viewCount desc</when>
+		<otherwise> id desc </otherwise>
+	</choose>
+</sql>
+<sql id='arrangeMember'>
+	<choose>
+		<when test="cri.order=='title'">title </when>
+		<when test="cri.order=='date'">startDate desc </when>
+		<otherwise> id desc </otherwise>
+	</choose>
+</sql>
+<sql id="memberRecordList">
+	<choose>
+		<when test="userid!=null and !userid.equals('')">
+		 and id not in (select all_drama_id from watched_drama_tbl where userid=#{userid}) and 
+	 	id not in (select all_drama_id from wishes_drama_tbl where userid=#{userid}) and 
+	 	id not in (select all_drama_id from watching_drama_tbl where userid=#{userid})
+		</when>
+		<otherwise> </otherwise>
+	</choose>
+</sql>
+
+<!-- <sql id="memberTotalCount">
+	<choose>
+		<when test="userid!=null and !userid.equals('')">
+		 and userid=#{userid}
+		</when>
+		<otherwise> </otherwise>
+	</choose>
+</sql> -->
+<!-- 페이징있는 목록리스트(비로그인 사용자) -->
+<select id="getList" resultType="org.kimyk.domain.AllDramaVO">
+	select * from(select @rownum:=@rownum+1 as rn, all_drama_tbl.* from 
+	(select @rownum:=0) as tmp, all_drama_tbl where <include refid="titleSearch"></include> id>0 order by 
+	 <include refid="arrange"></include>) 
+	 <![CDATA[ boardList where rn>(#{pageNum}-1)*#{amount} and rn<=#{pageNum}*#{amount}]]>
+</select>
+
+<!-- 전체 드라마 개수 가져오기 -->
+<select id="getTotalCount" resultType="int">
+	select count(*) from all_drama_tbl where <include refid="titleSearch"></include> id>0 
+</select>
+
+<!-- 회원전용 -->
+<!-- 페이징있는 목록리스트(watched_drama_tbl에 있는 드라마 제외) -->
+<select id="getListByUserid" resultType="org.kimyk.domain.AllDramaVO">
+	select * from(select @rownum:=@rownum+1 as rn, all_drama_tbl.* from 
+	(select @rownum:=0) as tmp, all_drama_tbl where id>0 
+	<include refid="memberRecordList"></include> 
+	 order by <include refid="arrangeMember"></include>) 
+	 <![CDATA[boardList where rn>(#{cri.pageNum}-1)*#{cri.amount} and rn<=#{cri.pageNum}*#{cri.amount}]]>
+</select>
+
+<!-- 전체 드라마 개수 가져오기 -->
+<select id="getTotalCountByUserid" resultType="int">
+	select count(*) from all_drama_tbl where id>0 <include refid="memberRecordList"></include>
+</select>
+
+
+
+<!-- 검색결과리스트 가져오기 -->
+<select id="getSearchList" resultType="org.kimyk.domain.AllDramaVO">
+	<![CDATA[select * from(select @rownum:=@rownum+1 as rn, all_drama_tbl.* from 
+	(select @rownum:=0) as tmp, all_drama_tbl where 
+	(title like CONCAT ('%',#{keyword},'%')) and id>0 order by ]]> 
+	<include refid="arrange"></include>) 
+	<![CDATA[boardList where rn>(#{pageNum}-1)*#{amount} and rn<=#{pageNum}*#{amount}]]>
+</select>
+
+
+<!-- 글쓰기 -->
+<insert id='insert'>
+	insert into all_drama_tbl(title,broadcastingName,startDate,endDate,state,totalEpisode,posterUrl,dayOfWeek) 
+	values(#{title}, #{broadcastingName}, #{startDate}, #{endDate}, #{state}, #{totalEpisode},#{posterUrl},#{dayOfWeek})
+</insert>
+
+<insert id='insertSelectKey'>
+	<selectKey keyProperty="id" order="BEFORE" resultType="long">
+		select max(id)+1 from all_drama_tbl
+	</selectKey>
+	insert into all_drama_tbl(id,title,broadcastingName,startDate,endDate,state,totalEpisode,posterUrl,dayOfWeek) 
+	values(#{id}, #{title}, #{broadcastingName}, #{startDate}, #{endDate}, #{state}, #{totalEpisode},#{posterUrl},#{dayOfWeek})
+</insert>
+
+<select id='detail' resultType="org.kimyk.domain.AllDramaVO">
+	select * from all_drama_tbl where id=#{id}
+</select>
+
+<update id='modify'>
+	update all_drama_tbl 
+	set title=#{title},
+	broadcastingName=#{broadcastingName},
+	startDate=#{startDate},
+	endDate=#{endDate},
+	state=#{state},
+	totalEpisode=#{totalEpisode},
+	dayOfWeek=#{dayOfWeek},
+	posterUrl=#{posterUrl} 
+	where id=#{id}
+</update>
+
+<delete id='remove'>
+	delete from all_drama_tbl where id=#{id}
+</delete>
+
+<!-- 이미들어있는 데이터인지 확인 -->
+<select id="checkAllDramaList" resultType="int">
+	select count(*) from all_drama_tbl where title=#{title} and startDate=#{startDate}
+</select>
+
+<!-- 드라마의 평균 평점 구해서 넣기 -->
+<update id="modifyAvgScore">
+	update all_drama_tbl set avgScore=(select avg(avgScore) from watched_drama_tbl where all_drama_id=#{id}) where id=#{id}
+	<!-- update all_drama_tbl set avgScore=((select sum(avgScore) from watched_drama_tbl)+#{score})/#{watchedTotalCount} where id=#{id} -->
+</update>
+<!-- 메인리스트 -->
+<select id="getOnAirList" resultType="org.kimyk.domain.AllDramaVO">
+	select * from all_drama_tbl where state in ('방영중','상시방영중') order by state='방영중' desc,dayOfWeek like CONCAT ('%',#{dayOfWeek},'%') desc
+</select>
+<select id="getExpectedList" resultType="org.kimyk.domain.AllDramaVO">
+	select * from all_drama_tbl where state='방영예정'
+</select>
+<select id="getWatchingList" resultType="org.kimyk.domain.AllDramaVO">
+	select a.* from watching_drama_tbl w,all_drama_tbl a where w.all_drama_id=a.id and w.userid=#{userid} order by state='방영중' desc
+</select>
+
+<!-- 각 드라마의 시청완료한 유저의 수 업데이트 -->
+<update id='modifyViewCount'>
+	update all_drama_tbl set viewCount=(select count(*) from watched_drama_tbl where all_drama_id=#{id}) where id=#{id}
+</update>
+
+<!-- 방영예정인 드라마중에서 방영시작한 드라마를 방영중으로 바꾸기 -->
+<update id="modifyState">
+	<![CDATA[update all_drama_tbl set state='방영중' 
+	where id in(select id from (select id from all_drama_tbl where state='방영예정') as a 
+	where startDate<sysdate())]]>
+</update>
+
+</mapper>

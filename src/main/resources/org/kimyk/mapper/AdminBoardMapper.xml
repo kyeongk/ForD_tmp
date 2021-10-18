@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kimyk.mapper.AdminBoardMapper">
+<select id="getNoticeList" resultType="org.kimyk.domain.AdminBoardVO">
+	<![CDATA[select * from(select @rownum:=@rownum+1 as rn, admin_board_tbl.* from (select @rownum:=0) as tmp, admin_board_tbl where ]]> 
+	 
+	 <![CDATA[ category in ('공지사항','이벤트') order by id desc) boardList where rn>(#{pageNum}-1)*#{amount} and rn<=#{pageNum}*#{amount}]]>
+</select>
+
+<select id="getNoticeTotalCount" resultType="int">
+	select count(*) from admin_board_tbl where category in ('공지사항','이벤트')
+</select>
+
+<select id="getFAQList" resultType="org.kimyk.domain.AdminBoardVO">
+	<![CDATA[select * from(select @rownum:=@rownum+1 as rn, admin_board_tbl.* from (select @rownum:=0) as tmp, admin_board_tbl where ]]> 
+	 
+	 <![CDATA[ category = 'FAQ' order by id desc) boardList where rn>(#{pageNum}-1)*#{amount} and rn<=#{pageNum}*#{amount}]]>
+</select>
+
+<select id="getFAQTotalCount" resultType="int">
+	select count(*) from admin_board_tbl where category = '문의하기'
+</select>
+
+<insert id="insertSelectKey">
+	<selectKey keyProperty="id" order="BEFORE" resultType="long">
+		select max(id)+1 from admin_board_tbl
+	</selectKey>
+	insert into admin_board_tbl(id, subject, content, category, imgUrl) 
+	values(#{id},#{subject},#{content},#{category},#{imgUrl})
+</insert>
+
+<select id="detail" resultType="org.kimyk.domain.AdminBoardVO">
+	select * from admin_board_tbl where id=#{id}
+</select>
+
+<update id="modify">
+	update admin_board_tbl 
+	set subject=#{subject},
+	content=#{content},
+	category=#{category},
+	imgUrl=#{imgUrl}  
+	where id=#{id}
+</update>
+
+<delete id='remove'>
+	delete from admin_board_tbl where id=#{id}
+</delete>
+</mapper>

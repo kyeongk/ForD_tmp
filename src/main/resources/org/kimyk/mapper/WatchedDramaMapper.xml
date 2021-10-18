@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kimyk.mapper.WatchedDramaMapper">
+
+<resultMap type="org.kimyk.domain.WatchedDramaVO" id="watchedMap">
+	<id property="id" column="id"/>
+	<result property="watchedStartDate" column="watchedStartDate"/>
+	<result property="watchedEndDate" column="watchedEndDate"/>
+	<result property="watchedRegDate" column="watchedRegDate"/>
+	<result property="avgScore" column="avgScore"/>
+	<result property="totalReview" column="totalReview"/>
+	<result property="modifyDate" column="modifyDate"/>
+	<result property="all_drama_id" column="all_drama_id"/>
+	<result property="userid" column="userid"/>
+	<collection property="allDramaVO" javaType="org.kimyk.domain.AllDramaVO">
+		<id property="id" column="id"/>
+		<result property="title" column="title"/>
+		<result property="posterUrl" column="posterUrl"/>
+		<result property="broadcastingName" column="broadcastingName"/>
+		<result property="startDate" column="startDate"/>
+		<result property="endDate" column="endDate"/>
+		<result property="state" column="state"/>
+		<result property="avgScore" column="avgScore"/>
+		<result property="totalEpisode" column="totalEpisode"/>
+		<result property="viewCount" column="viewCount"/>
+		<result property="dayOfWeek" column="dayOfWeek"/>
+	</collection>
+</resultMap>
+<sql id='titleSearch'>
+	<choose>
+		<when test="keyword!=null">(title like CONCAT ('%',#{keyword},'%')) and </when>
+		<otherwise> </otherwise>
+	</choose>
+</sql>
+<sql id='arrange'>
+	<choose>
+		<when test="order=='title'">title </when>
+		<when test="order=='date'">startDate desc </when>
+		<otherwise> w.id desc </otherwise>
+	</choose>
+</sql>
+<select id='getList' resultType="org.kimyk.domain.WatchedDramaVO" resultMap="watchedMap">
+	select * from(select @rownum:=@rownum+1 as rn, a.title, posterUrl, w.* from (select @rownum:=0) as tmp, all_drama_tbl a, watched_drama_tbl w where 
+	 <include refid="titleSearch"></include><![CDATA[ all_drama_id=a.id and w.id>0 and userid=#{userid} order by ]]>
+	 <include refid="arrange"></include><![CDATA[) boardList where rn>(#{pageNum}-1)*#{amount} and rn<=#{pageNum}*#{amount}]]>
+</select>
+
+<!-- 전체 드라마 개수 가져오기 -->
+<select id="getTotalCount" resultType="int">
+	select count(*) from all_drama_tbl a, watched_drama_tbl w where all_drama_id=a.id and userid=#{userid} and <include refid="titleSearch"></include> w.id>0
+</select>
+
+<insert id="insert">
+	insert into watched_drama_tbl(all_drama_id, avgScore ,userid) 
+	values(#{all_drama_id},#{avgScore},#{userid})
+</insert>
+
+<insert id="insertSelectKey">
+	<selectKey keyProperty="id" order="BEFORE" resultType="long">
+		select max(id)+1 from watched_drama_tbl
+	</selectKey>
+	insert into watched_drama_tbl(id, all_drama_id, avgScore,userid ) 
+	values(#{id}, #{all_drama_id},#{avgScore},#{userid})
+</insert>
+
+<!-- 이미 들어있는 값인지 확인 -->
+<select id="checkAllDramaId" resultType="int">
+	select count(*) from watched_drama_tbl where all_drama_id=#{all_drama_id} and userid=#{userid}
+</select>
+
+<!-- 평점만 간단하게 업데이트 -->
+<update id="modifyScore">
+	update watched_drama_tbl set avgScore=#{avgScore}, modifyDate=sysdate() where all_drama_id=#{all_drama_id} and userid=#{userid}
+</update>
+
+<select id="detail" resultType="org.kimyk.domain.WatchedDramaVO" resultMap="watchedMap">
+	select w.*,title,broadcastingName,startDate,endDate,state,posterUrl,a.avgScore,totalEpisode,viewCount,dayOfWeek 
+	from all_drama_tbl a, watched_drama_tbl w where w.all_drama_id=#{all_drama_id} and all_drama_id=a.id and w.userid=#{userid}
+</select>
+
+<delete id="remove">
+	delete from watched_drama_tbl where all_drama_id=#{all_drama_id} and userid=#{userid}
+</delete>
+
+<!-- 감상평까지 업데이트 -->
+<update id="modify">
+	update watched_drama_tbl 
+	set 
+	watchedStartDate=#{watchedStartDate},
+	watchedEndDate=#{watchedEndDate},
+	avgScore=#{avgScore},
+	totalReview=#{totalReview},
+	modifyDate=sysdate() 
+	where id=#{id}
+</update>
+
+<!-- 테이블에 들어있는 드라마인지 확인 -->
+<select id="checkWatchedTable" resultType="int">
+	select count(*) from watched_drama_tbl where all_drama_id=#{all_drama_id} and userid=#{userid}
+</select>
+</mapper>

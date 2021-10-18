@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kimyk.mapper.EpiReviewMapper">
+
+<select id="getList" resultType="org.kimyk.domain.EpiReviewVO">
+	<![CDATA[select * from(select @rownum:=@rownum+1 as rn, epi_review_tbl.* from (select @rownum:=0) as tmp, epi_review_tbl where  
+	 all_drama_id=#{all_drama_id} and id>0 and userid=#{userid} order by epiNumber asc) boardList where rn>(#{cri.pageNum}-1)*#{cri.amount} and rn<=#{cri.pageNum}*#{cri.amount}]]>
+</select>
+
+<select id="getTotalCount" resultType="int">
+	select count(*) from epi_review_tbl where all_drama_id=#{all_drama_id} and userid=#{userid}
+</select>
+
+<insert id="insert">
+	insert into epi_review_tbl (all_drama_id,score,epiNumber,epiReview,watchedDate,userid) values (#{all_drama_id}, #{score}, #{epiNumber},#{epiReview}, #{watchedDate}, #{userid})
+</insert>
+
+<!-- 평점만 업데이트 -->
+<update id="modifyScore">
+	update epi_review_tbl set score=#{score}, modifyDate=sysdate() where id=#{id}
+</update>
+
+
+<update id="modify">
+	update epi_review_tbl 
+	set  
+	epiReview=#{epiReview},
+	watchedDate=#{watchedDate},
+	score=#{score},
+	epiNumber=#{epiNumber},
+	modifyDate=sysdate() 
+	where id=#{id}
+</update>
+
+<select id="detail" resultType="org.kimyk.domain.EpiReviewVO">
+	select * from epi_review_tbl where id=#{id}
+</select>
+
+<delete id="remove">
+	delete from epi_review_tbl where id=#{id}
+</delete>
+<!-- all_drama_id와 userid로 회차별 리뷰 한꺼번에 삭제 -->
+<delete id="removeAll">
+	delete from epi_review_tbl where all_drama_id=#{all_drama_id} and userid=#{userid}
+</delete>
+<!-- 정주행 기록 -->
+<update id="modifyViewState">
+	update epi_review_tbl set viewState=#{viewState} where id=#{id}
+</update>
+<!-- 정주행 한번에 바꾸기 -->
+<update id="modifyViewStateAll">
+	update epi_review_tbl set viewState=#{viewState} where all_drama_id=#{all_drama_id} and userid=#{userid}
+</update>
+
+</mapper>

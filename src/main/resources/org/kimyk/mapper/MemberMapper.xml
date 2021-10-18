@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kimyk.mapper.MemberMapper">
+
+<resultMap type="org.kimyk.domain.MemberVO" id="memberMap">
+	<id property="userid" column="userid"/>
+	<result property="userid" column="userid"/>
+	<result property="userpw" column="userpw"/>
+	<result property="uname" column="uname"/>
+	<result property="userEmail" column="userEmail"/>
+	<result property="regDate" column="regDate"/>
+	<result property="updateDate" column="updateDate"/>
+	<collection property="authList" resultMap="authMap"></collection>
+	<collection property="authvo" javaType="org.kimyk.domain.AuthVO">
+		<id property="userid" column="userid"/>
+		<result property="auth" column="auth"/>
+	</collection>
+</resultMap>
+
+<resultMap type="org.kimyk.domain.AuthVO" id="authMap">
+	<result property="userid" column="userid"/>
+	<result property="auth" column="auth"/>
+</resultMap>
+
+<sql id="criteria">
+	<trim prefix=" AND (" suffix=") " prefixOverrides="OR">
+		<foreach item='type' collection="typeArr">
+			<trim prefix="OR">
+				<choose>
+					<when test="type=='I'.toString()"> mem.userid like CONCAT ('%',#{keyword},'%') </when>
+					<when test="type=='N'.toString()"> username like CONCAT ('%',#{keyword},'%') </when>
+					<when test="type=='A'.toString()"> auth like CONCAT ('%',#{keyword},'%') </when>
+				</choose>
+			</trim>
+		</foreach>
+	</trim>
+</sql>
+
+
+<select id="read" resultMap="memberMap">
+	select mem.*, auth from member_tbl mem left outer join member_auth_tbl auth on mem.userid=auth.userid where mem.userid=#{userid}
+</select>
+
+<insert id="signUp">
+	insert into member_tbl (userid,userpw,uname,userEmail) values(#{userid},#{userpw},#{uname},#{userEmail})
+</insert>
+
+<!-- 중복확인 -->
+<select id="idDupliChk" resultType="int">
+	select count(*) from member_tbl where userid=#{userid}
+</select>
+
+<select id="emailDupliChk" resultType="int">
+	select count(*) from member_tbl where userEmail=#{userEmail}
+</select>
+<!-- 비밀번호 일치여부확인 -->
+<select id="checkPw" resultType="String" parameterType="String">
+	select userpw from member_tbl where userid=#{userid}
+</select>
+<!-- 사용자가 회원정보 수정함 -->
+<update id="modifyByUser">
+	update member_tbl set uname=#{uname}, userEmail=#{userEmail} where userid=#{userid}
+</update>
+<update id="modifyPwByUser">
+	update member_tbl set userpw=#{userpw}, updateDate=sysdate() where userid=#{userid}
+</update>
+<!-- 사용자가 회원탈퇴함 -->
+<delete id="removeByUser">
+	delete from member_tbl where userid=#{userid}
+</delete>
+<select id="getMemberList" resultType="org.kimyk.domain.MemberVO" resultMap="memberMap">
+	 
+	 <![CDATA[select mem.*, auth from member_tbl mem, member_auth_tbl auth where mem.userid=auth.userid ]]> 
+	<include refid="criteria"></include>
+	 <![CDATA[  order by userid limit #{skipCount} , #{amount}]]>
+</select>
+
+<select id="getTotalMember" resultType="int">
+	select count(*) from member_tbl mem, member_auth_tbl auth where mem.userid=auth.userid <include refid="criteria"></include>
+</select>
+
+<!-- <delete id="delete">
+	delete from member_tbl where userid=#{userid}
+</delete> -->
+
+<delete id="remove">
+	delete from member_tbl where userid=#{userid}
+</delete>
+</mapper>

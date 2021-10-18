@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kimyk.mapper.MemberAuthMapper">
+
+<insert id="signUp">
+	insert into member_auth_tbl (userid,auth) values(#{userid},#{auth})
+</insert>
+
+<sql id="auth">
+		<choose>
+			<when test="auth=='A'.toString()"> 'ROLE_ADMIN' </when>
+			<when test="auth=='M'.toString()"> 'ROLE_MEMBER' </when>
+			<when test="auth=='U'.toString()"> 'ROLE_USER' </when>
+		</choose>
+</sql>
+
+<update id="modify">
+	update member_tbl mem left outer join member_auth_tbl auth on mem.userid=auth.userid 
+	set auth=<include refid="auth"></include> , updateDate=sysdate() where auth.userid = #{userid}
+</update>
+
+</mapper>

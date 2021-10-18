@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kimyk.mapper.WishesDramaMapper">
+<resultMap type="org.kimyk.domain.WishesDramaVO" id="wishesMap">
+	<id property="id" column="id"/>
+	<result property="wishesRegDate" column="wishesRegDate"/>
+	<result property="all_drama_id" column="all_drama_id"/>
+	<result property="userid" column="userid"/>
+	<collection property="allDramaVO" javaType="org.kimyk.domain.AllDramaVO">
+		<id property="id" column="id"/>
+		<result property="title" column="title"/>
+		<result property="posterUrl" column="posterUrl"/>
+		<result property="broadcastingName" column="broadcastingName"/>
+		<result property="startDate" column="startDate"/>
+		<result property="endDate" column="endDate"/>
+		<result property="state" column="state"/>
+		<result property="avgScore" column="avgScore"/>
+		<result property="totalEpisode" column="totalEpisode"/>
+		<result property="viewCount" column="viewCount"/>
+		<result property="dayOfWeek" column="dayOfWeek"/>
+	</collection>
+</resultMap>
+<sql id='titleSearch'>
+	<choose>
+		<when test="keyword!=null">(title like CONCAT ('%',#{keyword},'%')) and </when>
+		<otherwise> </otherwise>
+	</choose>
+</sql>
+<sql id='arrange'>
+	<choose>
+		<when test="order=='title'">title </when>
+		<when test="order=='date'">startDate desc </when>
+		<otherwise> w.id desc </otherwise>
+	</choose>
+</sql>
+<select id='getList' resultType="org.kimyk.domain.WishesDramaVO" resultMap="wishesMap">
+	<![CDATA[select * from(select @rownum:=@rownum+1 as rn, a.title, posterUrl,avgScore, w.* from (select @rownum:=0) as tmp, all_drama_tbl a, wishes_drama_tbl w where ]]> 
+	 <include refid="titleSearch"></include>
+	 <![CDATA[ all_drama_id=a.id and w.id>0 and userid=#{userid} order by ]]><include refid="arrange"></include><![CDATA[) boardList where rn>(#{pageNum}-1)*#{amount} and rn<=#{pageNum}*#{amount}]]>
+</select>
+
+<!-- 전체 드라마 개수 가져오기 -->
+<select id="getTotalCount" resultType="int">
+	select count(*) from all_drama_tbl a, wishes_drama_tbl w where all_drama_id=a.id and userid=#{userid} and <include refid="titleSearch"></include> w.id>0
+</select>
+
+<insert id="insert">
+	insert into wishes_drama_tbl(all_drama_id,userid) 
+	values(#{all_drama_id},#{userid})
+</insert>
+
+<insert id="insertSelectKey">
+	<selectKey keyProperty="id" order="BEFORE" resultType="long">
+		select max(id)+1 from wishes_drama_tbl
+	</selectKey>
+	insert into wishes_drama_tbl(id, all_drama_id,userid ) 
+	values(#{id}, #{all_drama_id},#{userid})
+</insert>
+
+<!-- 이미 들어있는 값인지 확인 -->
+<select id="checkAllDramaId" resultType="int">
+	select count(*) from wishes_drama_tbl where all_drama_id=#{all_drama_id} and userid=#{userid}
+</select>
+
+<select id="detail" resultType="org.kimyk.domain.WishesDramaVO" resultMap="wishesMap">
+	select w.*,title,broadcastingName,startDate,endDate,state,posterUrl,a.avgScore,totalEpisode,viewCount,dayOfWeek 
+	from all_drama_tbl a, wishes_drama_tbl w where w.all_drama_id=#{all_drama_id} and all_drama_id=a.id and w.userid=#{userid}
+</select>
+
+<delete id="remove">
+	delete from wishes_drama_tbl where all_drama_id=#{all_drama_id} and userid=#{userid}
+</delete>
+
+<!-- 테이블에 들어있는 드라마인지 확인 -->
+<select id="checkWishesTable" resultType="int">
+	select count(*) from wishes_drama_tbl where all_drama_id=#{all_drama_id} and userid=#{userid}
+</select>
+</mapper>
