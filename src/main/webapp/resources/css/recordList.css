@@ -1,0 +1,1378 @@
+@charset "UTF-8";
+/* @import url('https://fonts.googleapis.com/css2?family=&family=Noto+Sans+KR:wght@700&display=swap'); */
+.menu{
+	height:70px;
+	width:auto;
+}
+a{
+	color: black;
+}
+a:hover, a:focus{
+	color: #c184ff;
+	text-decoration: none;
+}
+.firstMenu{
+	padding-left:0;
+}
+.firstMenu li a:hover, a:focus{
+	color: #c184ff;
+    text-decoration: none;
+}
+.footerMenu>li>a:hover, .footerMenu>li>a:focus{
+	color: #c184ff;
+    text-decoration: none;
+}
+
+.navbar-brand{
+	width:auto;
+	/* margin-left: 70%; */
+	margin-left: 120px;
+	margin-right:10px;
+	min-width: 150px;
+	font-family: 'Carter One', cursive;
+	font-size: 55px;
+	color:#c184ff;
+}
+.navbar-default .navbar-brand{
+	color:#c184ff;
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus{
+	color:#c184ff;
+}
+.menu li{
+	display:inline;
+	margin:0px 10px;
+	font-size: 16px;
+	line-height: 70px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 700;
+}
+nav.navbar.navbar-default.navbar-static-top{
+	position: fixed;
+    width: 100%;
+    background-color: white;
+    top:0;
+    min-width:840px;
+}
+.menu,.userDiv{
+	display:inline-block;
+}
+.userDiv{
+	width:auto;
+	height:70px;
+	float:right;
+	text-align:right;
+	padding: 15px 0px;
+	margin-right:60px; 
+	font-family: 'Noto Sans KR', sans-serif;
+}
+.userBtn{
+	width:75px;
+	height:35px;
+	border-radius: 5px;
+	background-color: inherit;
+	-ms-background-color:white;
+	font-size: 13px;
+	margin:0 5px;
+	border: 1px solid #c184ff;
+}
+.userBtn:hover{
+	background-color:#c184ff;
+	color:white;
+}
+.userIcon{
+	border: none;
+	font-size: 20px;
+	background-color: inherit;
+	height: 40px;
+	width: 40px;
+}
+.userIcon>i{
+	font-size: 30px;
+	float: right;
+	margin-top: 5px;
+	color: #b6b6b6;
+	cursor: pointer;
+}
+.userIcon>i:hover {
+	color: #c184ff;
+}
+.dropdown-menu{
+	/* right:10%; */
+	left: unset;
+	right:28px;
+	font-size: 16px;
+	min-width: 100px;
+	text-align: center;
+}
+.dropdown-menu>li>a{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 700;
+	padding:0;
+}
+.userDiv>ul>li{
+	margin:5px;
+}
+.recordBtn{
+	width:80px;
+	height:40px;
+	background-color: inherit;
+	-ms-background-color:white;
+	border: none;
+	font-size: 15px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 700;
+	color:black;
+}
+.recordBtn:hover{
+	color: #c184ff;
+}
+.headerSearchForm{
+	display: inline;
+	margin-right: 35px;
+}
+/* IE10+ */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+	.input-group-addon, .input-group-btn, .input-group .form-control{
+		display:-ms-flexbox;
+	}
+	button{
+		background-color: white;
+	}
+	.adminBoardImg{
+		max-width: 100%;
+	}
+	span.tooltiptext.wishesText, span.tooltiptext.watchingText, span.tooltiptext.watchedText{
+	width: 55px;
+	}
+}
+/* end 헤더 CSS */
+/* FOOTER CSS 시작 */
+footer{
+	border-top: 1px solid #e7e7e7;
+	margin-top: 30px;
+}
+.footerP{
+	min-height: 70px;
+	margin:0 50px;
+	padding:0 30px;
+}
+.footerMenu li{
+	display: inline;
+    margin: 0px 10px;
+    font-size: 16px;
+    line-height: 70px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+}
+/* 공지사항 CSS */
+.footerTitle{
+	text-align: center;
+    margin-top: 10%;
+    margin-bottom: 50px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+    font-size: 45px;
+}
+.adminBoardDiv ul{
+	padding-left: 0;
+	border-bottom:solid 1px gray;
+}
+.adminBoardDiv li{
+	list-style: none;
+	position: relative;
+}
+.adminBoardTitle{
+	display: inline-block;
+}
+.adminBoardTitleText{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size:18px;
+	margin-bottom: 5px;
+}
+.adminBoardRegDate{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 12px;
+	color:gray;
+}
+.plusIcon{
+	float: right;
+	margin-top: 10px;
+}
+.plusIcon>i{
+	transition: transform 500ms ease-in-out 0s;
+}
+.fa-flip-vertical{
+	transform: rotate3d(1, 0, 0,180deg);
+    transition: transform 500ms ease-in-out 0s;
+}
+.adminBoardRegBtn{
+	width: 40px;
+    height: 25px;
+    border-radius: 5px;
+    background-color: inherit;
+    -ms-background-color: white;
+    font-size: 12px;
+    border: 1px solid #c184ff;
+    margin-bottom: 10px;
+}
+.adminBoardRegBtn:hover{
+	color:white;
+	background-color: #c184ff;
+}
+.adminBoardModBtn{
+	position: absolute;
+    top: 25px;
+    right: 45px;
+	width: 35px;
+    height: 25px;
+    text-align:center;
+    padding-top:4px;
+    border-radius: 5px;
+    background-color: inherit;
+    -ms-background-color: white;
+    font-size: 12px;
+    border: 1px solid #c184ff;
+    float: right;
+    cursor: pointer;
+}
+.adminBoardModBtn:hover{
+	color:white;
+	background-color: #c184ff;
+}
+.adminBoardModBtnDiv{
+	width: fit-content;
+	margin: 0 auto;
+}
+.adminBoardModBtnDiv>button{
+	color: black;
+    background-color: white;
+    border-color: #c184ff;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+}
+.adminBoardModBtnDiv>button[data-oper='modify']:hover{
+	color:white;
+	background-color: #c184ff;
+}
+.adminBoardModBtnDiv>button[data-oper='remove']:hover{
+	color:white;
+	background-color: #ff4040;
+	border-color: #ff4040;
+}
+.collapsible {
+  background-color:white;
+  color: black;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border-top:solid 1px gray;
+  border-bottom:none;
+	border-left:none;
+	border-right:none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+.active{
+	border-bottom:solid 1px gray;
+}
+.contentArticle{
+	padding:10px;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+.adminContent {
+  padding: 0 18px;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.2s ease-out;
+}
+.qnaText{
+	text-align: center;
+}
+.qnaLink{
+	cursor: pointer;
+	font-weight: bold;
+}
+.qnaLink:hover{
+	color: #c184ff;
+	text-decoration: none;
+}
+.adminBoardImg{
+	max-width: -webkit-fill-available;
+}
+/* listForAdmin page----------------------------------------------- */
+.listForAdminSelect{
+	margin-bottom: 0px;
+}
+.stateSearchSelect,.dayOfWeekSearch,.titleSearch{
+	display: inline-flex;
+	margin-right: 10px;
+}
+.listForAdminCenter, .listForAdminCenter>th{
+	text-align: center;
+}
+/* accessError page------------------ */
+.accessError{
+	text-align: center;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: bold;
+	margin-top: 20px;
+}
+h1.accessError{
+	margin-top: 200px;
+}
+/* member 관련 CSS 시작 --------------------------------- */
+.memberSearchForm>select{
+	height: 25px;
+}
+.memberSearchSelect{
+	display: inline-block;
+}
+.membetRemoveBtn{
+	margin-right: 10px
+}
+
+/* 메인CSS 시작 */
+.mainDiv1,.mainDiv2{
+	margin-top:40px; 
+}
+.mainDiv1Title,.mainDiv2Title{
+	font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+}
+.mainDiv{
+	padding:0;
+}
+.slideDiv{
+	width: 1610px;
+    margin: 0 auto;
+}
+li.list-inline-item.slick-slide.slick-current.slick-active{
+	margin-left: 0px;
+	margin-right: 0px;
+}
+ul.list-inline.mainUl.slide.slick-initialized.slick-slider {
+    max-width: 1610px;
+}
+.mainUl{
+	max-width: 1880px;
+}
+.mainDiv>.imgDiv{
+	width:250px;
+	height: 360px;
+	
+}
+.mainDiv img{
+	width: 100%;
+	height:100%;
+	object-fit: cover;
+}
+.mainDiv>.titleDiv{
+	font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 5px;
+    display: block;
+    max-width: 250px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    
+}
+.mainDiv>.dramaInfoDiv{
+	font-size: 15px;
+	color: gray;
+	margin-top: 3px;
+	
+}
+.mainDiv>.scoreDiv{
+	margin-top: 3px;
+}
+.mainSlide1Prev,.mainSlide1next{
+	position: absolute;
+    top: 40%;
+    display: block;
+	cursor: pointer;
+	color:black;
+	font-size: 25px;
+}
+.mainSlide1Prev {
+    left: -10px;
+}
+.mainSlide1next{
+	right: -20px;
+}
+.boardTop{
+	width:100%;
+	height:90px;
+	border-bottom:solid 1px black;
+}
+.boardDiv{
+	box-sizing: content-box;
+	width:95%;
+	min-height: 900px;
+	margin: 0 auto;
+	background-color: white;
+}
+i.indexStar{
+	font-size: 12px;
+}
+.todayOnAirIcon{
+	color:#c184ff;
+}
+/* .div-12{
+	box-sizing:content-box;
+	min-height:850px;
+	width:100%;
+	
+} */
+/* .div-6{
+	width:48%;
+	height:165px;
+	border-bottom:1px solid gray;
+	margin-left: 10px;
+	margin-right: 10px;
+	border-top:1px solid gray;
+	
+	float:left;
+} */
+/* 로그인,회원가입,회원정보 페이지 CSS */
+.loginTitle{
+	text-align: center;
+	margin-top: 25%;
+	margin-bottom: 50px;
+	font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+    font-size: 45px;
+}
+.findPw{
+	display: block;
+	text-align: center;
+	margin-top: 25px;
+}
+.loginInput{
+	height: 50px;
+}
+.loginSubmitBtn{
+    color: black;
+    background-color: white;
+    border-color: #c184ff;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-top: 40px;
+}
+.loginSubmitBtn:hover{
+	color:white;
+	background-color: #c184ff;
+}
+.signUpSuccessText{
+	text-align: center;
+    font-size: 20px;
+    font-family: 'Noto Sans KR';
+}
+.useridText{
+	text-align: center;
+    margin-top: 130px;
+    font-size: 20px;
+    font-family: 'Noto Sans KR';
+}
+.idText{
+	color:#c184ff;
+}
+.joinSubmitBtn:hover{
+	color: white;
+	background-color: #c184ff;
+}
+.joinInput{
+	height: 50px;
+	
+}
+.joinSubmitBtn{
+	color: black;
+    background-color: white;
+    border-color: #c184ff;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-top: 40px;
+}
+.signUpBtn{
+    border-radius: 5px;
+    background-color: inherit;
+    -ms-background-color: white;
+    font-size: 13px;
+    margin: 0 5px;
+    border: 1px solid #c184ff;
+}
+.signUpBtn:hover{
+	background-color: #c184ff;
+    color: white;
+}
+.help-block{
+	font-size: 12px;
+	font-family: 'Nanum Gothic', sans-serif;
+}
+.myInfoTable tr td:first-child{
+	text-align: right;
+	vertical-align: middle;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 17px;
+	font-weight: 800;
+}
+.myInfoTable tr td:last-child{
+	padding: 16px 0;
+}
+.myInfoBtnTd{
+	text-align: center;
+}
+.myInfoBtnTd>button{
+	margin-right:10px;
+}
+.myInfoRemoveBtn{
+	background-color: inherit;
+	border: 1px solid red;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+.myInfoRemoveBtn:hover{
+	background-color: red;
+	color:white;
+}
+.myInfoTable{
+	margin-bottom: 0;
+	vertical-align: middle;
+}
+.myInfoTable button{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+.myInfoBtn{
+	background-color: inherit;
+	border: 1px solid #c184ff;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+.myInfoBtn:hover{
+	background-color: #c184ff;
+    color: white;
+}
+/* 로그인 페이지 CSS 끝 */
+/* record/list css -----------------------------------*/
+h1.page-header{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 700;
+	display: inline-block;
+    text-align: center;
+}
+h1.listHeader{
+	width: 133px;
+}
+.page-header{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 700;
+	border-bottom: none;
+}
+hr{
+	margin-top: 0;
+}
+.searchDiv{
+	display: inline-flex;
+	width: 215px;
+}
+.searchDiv>input{
+	font-size: 14px;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+.pageHeaderBtnDiv{
+	width:380px;
+	height:45px;
+	float: right;
+	margin-top:50px;
+	margin-bottom:10px;
+	margin-right:10px;
+	display: inline-block;
+}
+.input-group-btn>.btn{
+	line-height: 1.43858;
+}
+.recordListDiv{
+	width:auto;
+}
+.watchedListDiv>#searchForm{
+	display: inline;
+}
+.pageHeaderBtnDiv>.btn{
+	margin: 0 5px;
+	line-height: 1.43858;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+.recordBtnDiv{
+	float: right;
+}
+#recordRegBtn{
+	font-size: 12px;
+	margin: 0 5px;
+	line-height: 1.43858;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+.posterDiv{
+	/* width:100%; */
+	width: 110px;
+	height: 150px;
+	margin:15px 0;
+	border-radius: 2px;
+}
+/* .recordImgDiv{
+	width: 120px;
+	height: 160px;
+} */
+.dramaInfo{
+	width:380px;
+	height: 130px;
+	margin:15px;
+}
+.list-inline-item{
+	display: inline-block;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+@media(min-width:1185px){
+	.recordUl{
+		margin-left: 0;
+		min-width: 1010px;
+	}
+	.list-inline-item.recordListLi{
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	#page-wrapper{
+		padding: 0 ;
+		margin: 0;
+	}
+}
+@media(min-width:1200px){
+	.recordUl{
+		margin-left: 10%;
+	}
+	.list-inline-item.recordListLi{
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	#page-wrapper{
+		padding: 0 ;
+		margin: 0;
+	}
+}
+@media(min-width:1210px){
+	.recordUl{
+		margin-left: 10%;
+	}
+}
+@media(min-width:1280px){
+	.recordUl{
+		margin-left: 12%;
+	}
+}
+@media(min-width:1370px){
+	.recordUl{
+		margin-left: 15%;
+	}
+}
+@media(min-width:1470px){
+	.recordUl{
+		margin-left: 0px;
+	}
+	.list-inline-item.recordListLi{
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	#page-wrapper{
+		padding: 0 ;
+		margin: 0;
+	}
+}
+@media(min-width:1515px){
+	.recordUl{
+		margin-left: 15px;
+	}
+	.list-inline-item.recordListLi{
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	#page-wrapper{
+		padding: 0 ;
+		margin: 0;
+	}
+}
+@media(min-width:1530px){
+	.recordUl{
+		margin-left: 30px;
+	}
+	.list-inline-item.recordListLi{
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	#page-wrapper{
+		padding: 0 ;
+		margin: 0;
+	}
+}
+@media(min-width:1560px){
+	.recordUl{
+		margin-left: 50px;
+	}
+	.list-inline-item.recordListLi{
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	#page-wrapper{
+		padding: 0 ;
+		margin: 0;
+	}
+}
+
+@media(min-width:1620px){
+	.recordUl{
+		margin-left: 35px;
+	}
+	.list-inline-item.recordListLi{
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	#page-wrapper{
+		padding: 0 ;
+		margin: 0 28px;
+	}
+}
+@media(min-width:1635px){
+	.recordUl{
+		/* margin-left: -60px; */
+	}
+	.list-inline-item.recordListLi{
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	#page-wrapper{
+		margin: 0 50px;
+    	padding: 0;
+	}
+	
+}
+@media(min-width:1665px){
+	.recordUl{
+		/* margin-left: -30px; */
+	}
+	.list-inline-item.recordListLi{
+		margin-right: 0px;
+	}
+}
+@media(min-width:1685px){
+	 .recordUl{
+		/* margin-left: -15px; */
+	}
+	.list-inline-item.recordListLi{
+		margin-right: 10px;
+	}
+}
+@media(min-width:1700px){
+	.recordUl{
+		margin-left: 0px;
+	}
+}
+@media(min-width:1715px){
+	.recordUl{
+		margin-left: 15px;
+	}
+}
+@media(min-width:1730px){
+	.recordUl{
+		margin-left: 90px;
+	}
+}
+.recordRegisterRegBtn,.dramaDupliConfirmBtn{
+	margin-right: 10px;
+}
+
+
+
+
+.recordUl{
+	margin-bottom:15px;
+}
+.recordUl>li{
+	border-top:1px solid #e6e6e6;
+	border-bottom: 1px solid #e6e6e6;
+	margin-bottom: 15px;
+	width: 31%;
+	min-height: 160px;
+	min-width: 460px;
+}
+.recordListOrder{
+	float: right;
+	margin-top: 60px;
+	position: relative;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 15px;
+	cursor: pointer;
+}
+a.recordListOrder:hover{
+	text-decoration: none;
+	color: #c184ff;
+}
+a.recordListOrder>i{
+	transition: transform 300ms ease-in-out 0s;
+}
+.dropdown-menu.recordListOrderUl{
+	font-family: 'Noto Sans KR', sans-serif;
+	right: 4px;
+    top: 65%;
+    font-size: 13px;
+    min-width: 90px;
+    max-width:90px;
+    left: auto;
+}
+.dropdown-menu.recordListOrderUl>li>a{
+	font-weight: normal;
+	font-size: 14px;
+}
+.recordTitle{
+	font-family: 'Noto Sans KR', sans-serif;
+	/* max-width:200px; */
+	font-size: 18px;
+	font-weight: 700;
+	margin-top: 15px;
+	margin-bottom: 5px;
+}
+.recordDetailTd{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 100;
+	font-size: 13px;
+}
+.idCheckBox{
+	float: right;
+}
+.icons>i{
+	cursor: pointer;
+}
+.topDiv{
+	position: fixed;
+	font-family: 'Noto Sans KR', sans-serif;
+    color: white;
+    border-radius:1px;
+    text-align: center;
+    padding: 6px 0px;
+    right: 70px;
+    bottom: 80px;
+    width: 30px;
+    height: 30px;
+    font-size:12px;
+    background: black;
+    opacity: 0.3;
+    cursor: pointer;
+}
+/* record/list 별점 고정 */
+.recordRatingDiv{
+	position: relative;
+	height: 90px;
+}
+.recordRatingDiv>.br-wrapper.br-theme-fontawesome-stars-o{
+	position: absolute;
+	bottom: 0;
+}
+.recordRatingDiv>.icons{
+	position: absolute;
+	bottom:-20px;
+	right:0;
+	
+	font-size: 35px;
+}
+.recordRatingDiv>.icons>.far{
+	color:#d2d2d2;
+}
+.recordRatingDiv>.icons>.fas{
+	color:#c184ff;
+}
+/* i.fas.iconsFull.icon2{
+	display:none;
+	visibility: hidden;
+	position: absolute;
+	left:0px;
+    text-align: center;
+    color: #c184ff;
+	font-size: 35px;
+} */
+
+.icons>.wishesIcon, .icons>.watchingIcon, .icons>.watchedIcon{
+	position: relative;
+}
+
+span.tooltiptext.wishesText, span.tooltiptext.watchingText, span.tooltiptext.watchedText{
+	font-size:12px;
+	visibility: hidden;
+	position: absolute;
+	z-index: 1;
+	bottom: 120%;
+	left:50%;
+	margin-left: -25px;
+    width: 50px;
+    text-align: center;
+    color: #c184ff;
+}
+.icons>.wishesIcon:hover .tooltiptext{
+	visibility: visible;
+}
+.icons>.watchingIcon:hover .tooltiptext{
+	visibility: visible;
+}
+.icons>.watchedIcon:hover .tooltiptext{
+	visibility: visible;
+}
+/* .icons>.far:hover{
+	visibility: hidden;
+}
+
+.icons>.far:hover .iconsFull{
+	visibility: visible;
+	display: inline;
+} */
+.recordRatingDiv .br-theme-fontawesome-stars-o .br-widget a:after{
+	font-size: 45px;
+}
+.icons{
+	z-index: 1;
+}
+
+
+/* watchedList css ----------------------------------*/
+.watchedListDiv{
+	width:280px;
+	height: 45px;
+    float: right;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    display: inline-block;
+}
+.watchedListUl{
+	margin-left: 20px;
+}
+.watchedListUl>li{
+	width:calc(100%/15);
+	min-width:139px;
+	margin-right: 5px;
+	margin-left: 5px;
+	margin-bottom: 5px;
+}
+.watchedList{
+	padding: 0 5px;
+}
+.watchedList>.imgDiv{
+	width:131px;
+	height: 190px;
+}
+.imgDiv img{
+	width:100%;	
+	object-fit: cover;
+	height: -webkit-fill-available;
+	border-radius: 5px;
+}
+.watchedList>.titleDiv{
+	display:block;
+	min-width:135px;
+	margin-top:5px;
+	line-height: 25px;
+	height:25px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 17px;
+	font-weight: 700;
+	text-align:center;
+	text-overflow: ellipsis;
+	white-space:nowrap;
+	overflow: hidden;
+}
+.watchedList>.scoreDiv{
+	min-width: 135px;
+	text-align: center;
+	margin-top:3px;
+	margin-bottom: 3px;
+	font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 100;
+    font-size: 14px;
+    color: #c184ff;
+}
+.recordRegLabel{
+	margin-bottom: 15px;
+}
+.col-lg-3.totalEpiDiv{
+	min-width: 100px;
+}
+.col-lg-3.broadDiv{
+	min-width: 120px;
+}
+.col-lg-3.stateDiv{
+	min-width: 380px;
+}
+.col-lg-1.dateDiv{
+	min-width: 127px;
+}
+.noneEpiReview{
+	margin-top:40px;
+	margin-bottom: 40px;
+	text-align: center;
+}
+.recordBtnTd{
+	text-align: right;
+	padding-right: 10px;
+}
+.episodeDivBody>ul{
+	padding-left: 0;
+}
+.replayCheck{
+	position: relative;	
+	width: 60px;
+    text-align: center;
+    float: left;
+    margin-top: 25px;
+    margin-left: 15px;
+}
+.replayCheckText{
+	position: absolute;
+	visibility:hidden;
+	top: -16px;
+    left: 0;
+    z-index: 1;
+    font-size: 11px;
+    color: #c184ff;
+}
+.replayCheck:hover .replayCheckText{
+	visibility: visible;
+}
+.wListOrder {
+    margin-top: 60px;
+    margin-left:10px;
+    position: relative;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+}
+.dropdown-menu.wListOrderUl {
+    font-family: 'Noto Sans KR', sans-serif;
+    right: auto;
+    top: 65%;
+    font-size: 13px;
+    min-width: 90px;
+    max-width: 90px;
+    left: 150px;
+}
+a.wListOrder>i {
+    transition: transform 300ms ease-in-out 0s;
+}
+
+
+
+
+/* .userdramaUl{
+	list-style: none;
+}
+.userdramaUl>li{
+	width:130px;
+	height: 200px;
+}
+.userdramaPoster{
+	position: relative;
+	width:100px;
+	height: 130px;
+	margin: 15px;
+}
+.userdramaImg{
+	width: 100%;
+	height: 100%;
+}
+
+
+.userdramaLi{
+	display:inline-block;
+	box-sizing: border-box;
+}
+.userdramaLi>a{
+	display:inline-block;
+	width:100%;
+}
+
+.userdrama.textDiv{
+	text-align: left;
+	width: calc(100%-15px);
+	margin-left: 15px;
+	margin-right: 15px;
+	height: auto;
+}
+.userdrama.titleDiv{
+	display:block;
+	line-height: 25px;
+	height:25px;
+	font-size: 16px;
+	font-weight: 500;
+	text-overflow: ellipsis;
+	white-space:nowrap;
+	overflow: hidden;
+	
+}
+.userdrama.userdramaInfo{
+	color: red;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 18px;
+	height: 18px;
+} */
+/* record/get CSS */
+.nonmemberText{
+	text-align: center;
+    margin-top: 200px;
+    font-size: 20px;
+    font-family: 'Noto Sans KR';
+}
+.poster{
+	width:270px;
+	min-height: 340px;
+	margin:10px auto;
+}
+.poster>img{
+	width:100%;
+	border-radius: 5px;
+}
+.epiUl li{
+	cursor: pointer;
+}
+/* .recordGetIcons>.fa-star,.recordGetIcons>.fa-heart,.recordGetIcons>.fa-eye{
+	color: #d8b6fb;
+	font-size: 35px;
+	margin-left:5px;
+	margin-right: 5px; 
+	cursor: pointer;
+} */
+.recordGetIcons>.icons>.far{
+	color: #d2d2d2;
+	font-size: 35px;
+	margin-left:5px;
+	margin-right: 5px; 
+	cursor: pointer;
+}
+.recordGetIcons>.icons>.fas{
+	color: #c184ff;
+	font-size: 35px;
+	margin-left:5px;
+	margin-right: 5px; 
+	cursor: pointer;
+}
+
+.recordGetIcons>.far.watchedIcon,.recordGetIcons>.far.wishesIcon,.recordGetIcons>.far.watchingIcon{
+	position: relative;
+}
+span.tootiptext.recordGetSpan{
+	font-size:12px;
+	position: absolute;
+	visibility: hidden;
+	z-index: 1;
+	bottom: 120%;
+	left:50%;
+	margin-left: -25px;
+	width: 50px;
+	text-align: center;
+}
+i.fas.iconsFull.icon1{
+	display: none;
+    visibility: hidden;
+    position: absolute;
+    left: 0px;
+    text-align: center;
+    color: #c184ff;
+    font-size: 35px;
+}
+.recordGetIcons>.far:hover .recordGetSpan{
+	visibility: visible;
+}
+.recordGetIcons>.far:hover{
+	visibility: hidden;
+}
+
+.recordGetIcons>.far:hover .iconsFull{
+	visibility: visible;
+	display: inline;
+}
+.selectedBtn, .hoverBtn{
+	color: purple;
+}
+.getTitle,.getDramaInfo,.totalScoreDiv,.recordGetIcons{
+	font-family: 'Noto Sans KR', sans-serif;
+	text-align: center;
+	margin:10px 15px;
+}
+.getDramaInfo,.totalScoreDiv{
+	color:#d2d2d2;
+}
+.recordGetIcons{
+	margin-top: 20px;
+}
+.getTitle{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 700;
+}
+
+.getDramaInfo{
+	
+}
+
+.recordTitle{
+	
+	
+}
+.episodeDiv{
+	float: right;
+	box-sizing:border-box;
+	max-width:810px;
+	height:auto;
+	background-color: #d2d2d2;
+	margin-right: 15px;
+}
+.reviewRegBtn{
+	background-color: inherit;
+	border: none;
+	font-size: 35px;
+	float: right;
+	margin-right: 15px;
+}
+.episodeDivBody li{
+	border-bottom: 1px solid black;
+}
+.episodeDivHeader{
+	font-family: 'Nanum Gothic', sans-serif;
+	font-size: 35px;
+	font-weight: bold;
+	/* width:810px; */
+	border-bottom: 1px solid black;
+	margin-top: 20px;
+	
+}
+.episodeDivBody ul{
+	list-style: none;
+}
+.episodeTbl{
+	margin: 10px;
+}
+.watchedDateTd{
+	line-height: 20px;
+	color: gray;
+	font-size: 12px;
+}
+.episodeNumTd{
+	
+	font-size: 30px;
+	font-family: 'Nanum Gothic', sans-serif;
+	width: 90px;
+}
+.episodeReviewTd{
+	display:-webkit-box;
+	max-width:900px;
+	max-height: 70px;
+	padding: 10px 15px;
+	white-space:normal;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp:3;
+	-webkit-box-orient:vertical;
+	font-family: 'Nanum Gothic', sans-serif;
+	/* white-space:nowrap; */
+	
+}
+.episodeNumTd,.scoreTd,.watchedDateTd{
+	text-align: center;
+}
+.scoreTd{
+	height: 50px;
+	width:160px;
+}
+.totalScordTd{
+	width:260px;
+}
+.totalScordTd .br-theme-fontawesome-stars-o .br-widget a:after{
+	font-size: 40px;
+}
+.watchingTableText ,.wishesTableText, .watchedTableText, .noneTableText{
+	text-align: center;
+	margin-top: 25px;
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
+
+/* pagination */
+.center-block {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+.pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+.pagination > li {
+  display: inline;
+}
+.pagination > li > a,
+.pagination > li > span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #c184ff;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+  margin-left: 0;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+  z-index: 2;
+  color: #a953ff;
+  background-color: #eee;
+  border-color: #ddd;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  z-index: 3;
+  color: #fff;
+  cursor: default;
+  background-color: #c184ff;
+  border-color: #c184ff;
+}
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+  color: #777;
+  cursor: not-allowed;
+  background-color: #fff;
+  border-color: #ddd;
+}
+
+div#page-wrapper{
+	margin-top: 70px;
+	margin-bottom:60px;
+	min-height: 930px;
+}

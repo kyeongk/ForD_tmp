@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+<bean id="customAccessDenied" class="org.kimyk.security.CustomAccessDeniedHandler"></bean>
+<!-- <bean id="customLoginSuccess" class="org.kimyk.security.CustomLoginSuccessHandler"></bean> -->
+<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+<bean id="customUserDetailsService" class="org.kimyk.security.CustomUserDetailsService"></bean>
+<security:http auto-config="true" use-expressions="true">
+	<security:intercept-url pattern="/member/memberList" access="hasRole('ROLE_ADMIN')"/>
+	<security:intercept-url pattern="/record/modify" access="hasRole('ROLE_ADMIN')"/>
+	<security:intercept-url pattern="/record/register" access="hasRole('ROLE_ADMIN')"/>
+	<security:intercept-url pattern="/record/listForAdmin" access="hasRole('ROLE_ADMIN')"/>
+	<security:intercept-url pattern="/adminBoardModify" access="hasRole('ROLE_ADMIN')"/>
+	<security:intercept-url pattern="/adminBoardRegister" access="hasRole('ROLE_ADMIN')"/>
+	
+	
+	<security:intercept-url pattern="/member/myInfo" access="isAuthenticated()"/>
+	<security:intercept-url pattern="/watched/*" access="isAuthenticated()"/>
+	<security:intercept-url pattern="/watching/*" access="isAuthenticated()"/>
+	<security:intercept-url pattern="/wishes/*" access="isAuthenticated()"/>
+	
+	<security:intercept-url pattern="/member/signUp" access="permitAll"/>
+	<security:intercept-url pattern="/record/*" access="permitAll"/>
+	<security:intercept-url pattern="/*" access="permitAll"/>
+	
+	
+	
+	
+	
+	
+	
+	
+	<security:intercept-url pattern="/favicon.ico" access="isAnonymous()"/>
+	<security:access-denied-handler ref="customAccessDenied"/>
+	<security:form-login login-page="/customLogin"/>
+	<security:logout logout-url="/customLogout" invalidate-session="true" delete-cookies="remember-me,JSESSION_ID" logout-success-url="/"/>
+	<security:remember-me data-source-ref="dataSource" token-validity-seconds="2419200"/> <!-- 4주 -->
+</security:http>
+<security:authentication-manager>
+	<security:authentication-provider user-service-ref="customUserDetailsService">
+		<security:password-encoder ref="bcryptPasswordEncoder"/>
+	</security:authentication-provider>
+</security:authentication-manager>
+</beans>
