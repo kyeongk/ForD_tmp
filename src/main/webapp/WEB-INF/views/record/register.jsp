@@ -190,12 +190,23 @@ $(document).ready(function(e){
 			alert("드라마 제목은 필수값입니다.");
 			return $("input[name='title']").focus();
 		}
-		if(isNaN($("input[name='totalEpisode']").val())==false){
-			formObj.append(str).submit();
+		if($("input[name='totalEpisode']").val().length==0){
+			var chk=confirm("총 회자가 입력되지 않았습니다. 총 회차가 입력되지 않으면 1200회차로 자동등록됩니다. 그대로 등록하시겠습니까? ");
+			if(chk==true){
+				$("input[name='totalEpisode']").val(1200);
+				formObj.append(str).submit();
+			}else{
+				return $("input[name='totalEpisode']").focus();
+			}
 		}else{
-			alert("회차에는 숫자만 입력할 수 있습니다.");
-			return $("input[name='totalEpisode']").focus();
+			if(isNaN($("input[name='totalEpisode']").val())==false){
+				formObj.append(str).submit();
+			}else{
+				alert("회차에는 숫자만 입력할 수 있습니다.");
+				return $("input[name='totalEpisode']").focus();
+			}
 		}
+		
 		
 	});
 	
