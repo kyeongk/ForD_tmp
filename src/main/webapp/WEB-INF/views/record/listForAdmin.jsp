@@ -5,7 +5,7 @@
 <%@include file="../includes/header.jsp" %>
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">회원관리</h1>
+                    <h1 class="page-header">드라마관리</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -14,14 +14,14 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Member List Page
+                            Drama List Page
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                        	<!-- 회원관리폼 -->
+                        	<!-- 드라마관리폼 -->
                         	<form role="form" id='memberAdmin' action="/member/modify" method='post'>
                         	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-                        	<div class='row'>
+                        	<%-- <div class='row'>
                             	<div class="col-lg-12 col-md-12 col-sm-12">
                             		<div class="form-group memberSearchSelect">
                            				<select class="form-control" name='auth'>
@@ -35,7 +35,7 @@
 									<button data-oper='remove' class="btn btn-danger btn-xs pull-right membetRemoveBtn">회원 삭제</button>
                             		
                             	</div>
-                            </div>
+                            </div> --%>
                             
                             <table width="100%" class="table table-striped table-bordered table-hover" style="margin-top:20px">
                                 <thead>
@@ -74,7 +74,7 @@
                                		
                                		<td class='listForAdminCenter'><c:out value="${drama.id }"/></td>
                                		<td><c:out value="${drama.title }"/></td>
-                               		<td><c:out value="${drama.broadcastingName }"/></td>
+                               		<td class="listForAdminCenter"><c:out value="${drama.broadcastingName }"/></td>
                                		<td class='listForAdminCenter'><c:out value="${drama.totalEpisode }"/></td>
                                		<td><c:out value="${drama.state }"/></td>
                                		<td class='listForAdminCenter'><fmt:formatDate pattern="yyyy.MM.dd" value="${drama.startDate }"/></td>
