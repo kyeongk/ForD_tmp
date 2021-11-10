@@ -50,6 +50,8 @@
 	<link rel="stylesheet" href="/resources/css/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/css/jquery-ui.theme.css">
 	<link rel="stylesheet" href="/resources/css/all.css">
+	
+	<!-- 내가 만든 css -->
 	<link rel="stylesheet" href="/resources/css/recordList.css">
 	
 	<script type="text/javascript" src="/resources/js/jquery-3.5.1.js"></script>
